@@ -1,0 +1,28 @@
+
+CREATE TABLE public.Aluno (
+                idAluno INTEGER NOT NULL DEFAULT nextval('public.aluno_idaluno_seq'),
+                nome VARCHAR(40) NOT NULL,
+                ra INTEGER NOT NULL,
+                cpf INTEGER NOT NULL,
+                telefone INTEGER NOT NULL,
+                CONSTRAINT aluno_pk PRIMARY KEY (idAluno)
+);
+
+
+
+CREATE TABLE public.Emprestimos (
+                idEmprestimo INTEGER NOT NULL,
+                dataEmprestimo DATE NOT NULL,
+                dataRetorno DATE NOT NULL,
+                idAluno INTEGER NOT NULL,
+                idLivro VARCHAR NOT NULL,
+                CONSTRAINT emprestimos_pk PRIMARY KEY (idEmprestimo)
+);
+
+
+ALTER TABLE public.Emprestimos ADD CONSTRAINT aluno_emprestimos_fk
+FOREIGN KEY (idAluno)
+REFERENCES public.Aluno (idAluno)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
